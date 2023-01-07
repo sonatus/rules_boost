@@ -174,9 +174,9 @@ def boost_deps():
             ],
         )
 
-    if "net_zlib_zlib" not in native.existing_rules():
+    if "zlib" not in native.existing_rules():
         http_archive(
-            name = "net_zlib_zlib",
+            name = "zlib",
             build_file = "@com_github_nelhage_rules_boost//:BUILD.zlib",
             sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
             strip_prefix = "zlib-1.2.11",
@@ -209,9 +209,9 @@ def boost_deps():
             ],
         )
 
-    if "com_github_facebook_zstd" not in native.existing_rules():
+    if "zstd" not in native.existing_rules():
         http_archive(
-            name = "com_github_facebook_zstd",
+            name = "zstd",
             build_file = "@com_github_nelhage_rules_boost//:BUILD.zstd",
             sha256 = "59ef70ebb757ffe74a7b3fe9c305e2ba3350021a918d168a046c6300aeea9315",
             strip_prefix = "zstd-1.4.4",
