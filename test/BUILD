@@ -39,7 +39,7 @@ cc_test(
     size = "small",
     srcs = ["asio_ssl_test.cc"],
     deps = [
-        "@boost//:asio_ssl",
+        "@boost//:asio",
     ],
 )
 

@@ -414,13 +414,7 @@ boost_library(
 
 boost_library(
     name = "asio",
-    srcs = [
-        "boost/asio/impl/src.hpp",
-        "@com_github_nelhage_rules_boost//src:build_asio.cpp",
-    ],
-    defines = [
-        "BOOST_ASIO_SEPARATE_COMPILATION",
-    ] + select({
+    defines = select({
         ":osx": [
             "BOOST_ASIO_DISABLE_STD_EXPERIMENTAL_STRING_VIEW",
         ],
@@ -435,17 +429,6 @@ boost_library(
         ":cerrno",
         ":date_time",
         ":regex",
-    ],
-)
-
-cc_library(
-    name = "asio_ssl",
-    srcs = [
-        "@com_github_nelhage_rules_boost//src:build_asio_ssl.cpp",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":asio",
         "@openssl//:ssl",
     ],
 )
