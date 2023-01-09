@@ -354,7 +354,7 @@ BOOST_ATOMIC_DEPS = [
 ]
 
 cc_library(
-    name = "atomic_sse",
+    name = "boost_atomic_sse",
     srcs = BOOST_ATOMIC_SSE_SRCS + glob([
         "libs/atomic/src/*.hpp",
         "boost/atomic/detail/*.hpp",
@@ -380,7 +380,7 @@ boost_library(
     copts = ["-Iexternal/boost/libs/atomic/src"],
     exclude_src = ["libs/atomic/src/wait_ops_windows.cpp"] + BOOST_ATOMIC_SSE_SRCS,
     deps = BOOST_ATOMIC_DEPS + select({
-        ":x86_64": [":atomic_sse"],
+        ":x86_64": [":boost_atomic_sse"],
         "//conditions:default": [],
     }),
 )
@@ -2264,14 +2264,14 @@ BOOST_LOG_DEPS = [
 
 BOOST_LOG_SSSE3_DEP = select({
     ":x86_64": [
-        ":log_dump_ssse3",
+        ":boost_log_dump_ssse3",
     ],
     "//conditions:default": [
     ],
 })
 
 cc_library(
-    name = "log_dump_ssse3",
+    name = "boost_log_dump_ssse3",
     srcs = ["libs/log/src/dump_ssse3.cpp"] + hdr_list("log"),
     hdrs = [],
     copts = ["-msse4.2"],

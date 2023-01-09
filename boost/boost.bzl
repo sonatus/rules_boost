@@ -80,8 +80,8 @@ def boost_library(
     if linkopts == None:
         linkopts = []
 
-    return native.cc_library(
-        name = name,
+    native.cc_library(
+        name = "boost_" + name,
         visibility = visibility,
         defines = default_defines + defines,
         includes = ["."] + includes,
@@ -93,6 +93,11 @@ def boost_library(
         linkopts = linkopts,
         linkstatic = linkstatic,
         licenses = ["notice"],
+    )
+    native.alias(
+        name = name,
+        visibility = visibility,
+        actual = ":boost_" + name,
     )
 
 # Some boost libraries are not safe to use as dynamic libraries unless a
@@ -147,8 +152,8 @@ def boost_so_library(
         interface_library = ":%s_dll_interface_file" % name,
         visibility = ["//visibility:private"],
     )
-    return boost_library(
-        name = name,
+    boost_library(
+        name = "boost_" + name,
         boost_name = boost_name,
         defines = defines,
         exclude_hdr = exclude_hdr,
@@ -161,6 +166,11 @@ def boost_so_library(
             "@boost//:osx": [":_imported_%s.dylib" % name],
             "@boost//:windows": [":_imported_%s.dll" % name],
         }),
+    )
+    native.alias(
+        name = name,
+        visibility = ["//visibility:public"],
+        actual = ":boost_" + name,
     )
 
 def boost_deps():
