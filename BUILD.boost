@@ -429,7 +429,7 @@ boost_library(
         ":cerrno",
         ":date_time",
         ":regex",
-        "@boringssl//:ssl",
+        "@libressl",
     ],
 )
 
