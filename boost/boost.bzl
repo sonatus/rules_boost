@@ -202,9 +202,9 @@ def boost_deps():
         http_archive(
             name = "org_bzip_bzip2",
             build_file = "@com_github_nelhage_rules_boost//:BUILD.bzip2",
-            sha256 = "1a1b75f370f6963fc7bc2f78b31c754036c822ac77d7cc618e79bb834a49f482",
+            sha256 = "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
             strip_prefix = "bzip2-bzip2-1.0.8",
-            url = "https://gitlab.com/bzip2/bzip2/-/archive/bzip2-1.0.8/bzip2-bzip2-1.0.8.tar.bz2",
+            url = "https://mirror.bazel.build/sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
         )
 
     if "org_lzma_lzma" not in native.existing_rules():
