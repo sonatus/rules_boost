@@ -240,7 +240,7 @@ def boost_deps():
             sha256 = "aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a",
             strip_prefix = "boost_1_75_0",
             url = "https://sourceforge.net/projects/boost/files/boost/1.75.0/boost_1_75_0.tar.gz",
-            patches = ["//boost/boost.patch"],
+            patches = ["@com_github_nelhage_rules_boost//:boost/boost.patch"],
         )
 
     # If only `repo_mapping` actually worked
