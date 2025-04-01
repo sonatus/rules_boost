@@ -1,0 +1,76 @@
+diff -Naur BUILD.bazel BUILD.bazel
+--- BUILD.bazel	2025-04-01 14:47:49.564018160 -0700
++++ BUILD.bazel	2025-03-31 15:26:44.255969547 -0700
+@@ -18,6 +18,14 @@
+ )
+ 
+ config_setting(
++    name = "qnx",
++    constraint_values = [
++        "@platforms//os:qnx",
++    ],
++    visibility = ["//visibility:public"],
++)
++
++config_setting(
+     name = "android",
+     constraint_values = [
+         "@platforms//os:android",
+@@ -69,6 +77,15 @@
+ )
+ 
+ config_setting(
++    name = "qnx_aarch64",
++    constraint_values = [
++        "@platforms//os:qnx",
++        "@platforms//cpu:aarch64",
++    ],
++    visibility = ["//visibility:public"],
++)
++
++config_setting(
+     name = "linux_x86_64",
+     constraint_values = [
+         "@platforms//os:linux",
+@@ -422,6 +439,7 @@
+     }),
+     linkopts = select({
+         ":android": [],
++        ":qnx": [],
+         "//conditions:default": ["-lpthread"],
+     }),
+     deps = [
+@@ -1870,7 +1888,7 @@
+ boost_library(
+     name = "thread",
+     srcs = selects.with_or({
+-        (":linux", ":android"): [
++        (":linux", ":android", ":qnx"): [
+             "libs/thread/src/pthread/once.cpp",
+             "libs/thread/src/pthread/thread.cpp",
+         ],
+@@ -1885,7 +1903,7 @@
+         ],
+     }),
+     hdrs = selects.with_or({
+-        (":linux", ":android"): [
++        (":linux", ":android", ":qnx"): [
+             "libs/thread/src/pthread/once_atomic.cpp",
+         ],
+         ":osx": [
+@@ -1897,6 +1915,7 @@
+         ":linux": [
+             "-lpthread",
+         ],
++        ":qnx": [],
+         ":osx": [
+             "-lpthread",
+         ],
+@@ -1907,6 +1926,7 @@
+         ":linux_arm": [],
+         ":linux_ppc": [],
+         ":linux_x86_64": [],
++        ":qnx_aarch64": [],
+         ":osx": [],
+         ":windows_x86_64": [
+             "BOOST_ALL_NO_LIB",
